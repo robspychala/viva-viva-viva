@@ -1,0 +1,17 @@
+application: viva-viva-viva
+version: 1
+runtime: python
+api_version: 1
+
+default_expiration: "1d"
+
+handlers:
+
+- url: /images
+  static_dir: static/images
+      
+- url: /library
+  static_dir: static/library
+  
+- url: .*
+  script: main_controller.py
