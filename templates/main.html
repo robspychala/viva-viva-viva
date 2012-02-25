@@ -49,7 +49,7 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 
 <h1><a href="/">VIVA-VIVA-VIVA</a><sub>viva-radio.com without the flash</sub></h1>
 
-<form>
+<form id="main_form">
   DJs: <select name="aid" id="artists" disabled="true"></select> &nbsp;
   Playlists: <select name="playlistid" id="playlists" disabled="true"></select> &nbsp;
   <input type="submit" disabled="true" value="Load &amp; Play Playlist">

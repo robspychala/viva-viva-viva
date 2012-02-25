@@ -1,8 +1,6 @@
 soundManager.url = '/library/';
 soundManager.onready(function() {
   
-  // alert("hi")
-  
 });
 
 $(document).ready(function(){
@@ -18,8 +16,19 @@ $(document).ready(function(){
       var loc = json.data[i].showlocation.length > 1 ? (" - " + json.data[i].showlocation) : ""
       options += '<option value="' + json.data[i].showid + '"' + selected + '>' + json.data[i].showtitle + loc + '</option>';
     }
+    
     $("#artists").html(options);
     $("#artists").removeAttr("disabled");
+    
+    var autoPlay = false;
+    
+    if (!$('meta[aid]').attr("aid")) {
+      var options = $("#artists > option");
+      var random = Math.floor(options.length * (Math.random() % 1));
+      $("#artists > option").attr('selected', false).eq(random).attr('selected', true);
+      
+      autoPlay = true;
+    }    
     
     $.getJSON("/ajax/get_playlists",{showid: $('#artists').val()}, function(json){
       var options = '';
@@ -30,11 +39,13 @@ $(document).ready(function(){
       $("#playlists").html(options);
       $("#playlists").removeAttr("disabled");
       $("input[type=submit]").removeAttr("disabled");
+      
+      if (autoPlay) $("#main_form").submit();
+
     })
-    
   })
   
-  $("#artists").change(function(){
+  $("#artists").change(function() {
     $("#playlists").attr("disabled", "true");
     $("input[type=submit]").attr("disabled", "true");
     $.getJSON("/ajax/get_playlists",{showid: $('#artists').val()}, function(json){
