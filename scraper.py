@@ -109,10 +109,10 @@ if __name__ == '__main__':
       # print show
       # print playlist
       showtitle = re.sub('[^\w\s-]', '', playlist['playlistname'].strip())
-      showtitle = showtitle[0:50] + " (" + playlist['playlistid'] + ")"
+      showtitle = showtitle[0:100] + " (" + playlist['playlistid'] + ")"
       
       showdj = show['showdj'].strip()
-      showdj = showdj[0:50]
+      showdj = showdj[0:100]
       try:
         os.makedirs(root_path + showdj + "/" + showtitle)
       except:
@@ -134,7 +134,7 @@ if __name__ == '__main__':
           name = name + " - "
         name = name + track['artist'].strip()
         
-        trackname = str(i) + " " + name[0:50]
+        trackname = str(i) + " " + name[0:100]
         trackname = re.sub('[^\w\s-]', '', trackname)
         
         path = root_path + showdj + "/" + showtitle + "/" + trackname + ext

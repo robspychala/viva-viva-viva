@@ -56,8 +56,14 @@ $(document).ready(function(){
       $("#playlists").html(options);
       $("#playlists").removeAttr("disabled");
       $("input[type=submit]").removeAttr("disabled");
+      
     })
   })
+  
+  $("#playlists").change(function() {
+    $("#main_form").submit();
+  })
+  
 
   $("#player_play").click(function() {
     play();
