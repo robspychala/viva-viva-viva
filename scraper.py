@@ -106,16 +106,21 @@ if __name__ == '__main__':
     for playlist in playlists:
       r = requests.get('http://www.viva-radio.com/xml/getshow.php?aid=%d&playlist=%d&tzone=%d' % (int(item['showid']), int(playlist['playlistid']), -4))
       show = show_xml_to_json(r.text)
+      # print show
+      # print playlist
+      showtitle = re.sub('[^\w\s-]', '', playlist['playlistname'].strip())
+      showtitle = showtitle[0:50] + " (" + playlist['playlistid'] + ")"
       
-      showtitle = re.sub('[^\w\s-]', '', item['showtitle'].strip())
+      showdj = show['showdj'].strip()
+      showdj = showdj[0:50]
       try:
-        os.makedirs(root_path + show['showdj'].strip() + "/" + showtitle)
+        os.makedirs(root_path + showdj + "/" + showtitle)
       except:
         pass
         
       path, ext = os.path.splitext(show['showphoto'])
       r = requests.get(show['showphoto'])
-      path = root_path + show['showdj'].strip() + "/" + showtitle + "/cover" + ext
+      path = root_path + showdj + "/" + showtitle + "/cover" + ext
       with open(path, 'wb') as f:
         print show['showphoto'], "->", path #, f, r.raw
         f.write(r.raw.data)
@@ -129,10 +134,10 @@ if __name__ == '__main__':
           name = name + " - "
         name = name + track['artist'].strip()
         
-        trackname = str(i) + " " + name
+        trackname = str(i) + " " + name[0:50]
         trackname = re.sub('[^\w\s-]', '', trackname)
         
-        path = root_path + show['showdj'].strip() + "/" + showtitle + "/" + trackname + ext
+        path = root_path + showdj + "/" + showtitle + "/" + trackname + ext
         r = requests.get(track['location'])
         with open(path, 'wb') as f:
           print track['location'], "->", path #, f, r.raw
