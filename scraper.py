@@ -1,4 +1,5 @@
 from BeautifulSoup import BeautifulStoneSoup # For processing XML
+from optparse import OptionParser
 
 import re, logging, os
 
@@ -88,6 +89,14 @@ def show_xml_to_json(content):
     
 if __name__ == '__main__':
   
+  parser = OptionParser()
+  parser.add_option("-p", "--path", dest="path", help="path to save data", default='./')
+
+  (options, args) = parser.parse_args()
+  root_path = os.path.abspath(options.path) + "/"
+  
+  print "Saving to path: %s" % root_path
+  
   import requests
   r = requests.get('http://www.viva-radio.com/xml/getcontribs_live.php?tzone=%d' % (-4))
   data = artists_xml_to_json(r.text)
@@ -98,16 +107,15 @@ if __name__ == '__main__':
       r = requests.get('http://www.viva-radio.com/xml/getshow.php?aid=%d&playlist=%d&tzone=%d' % (int(item['showid']), int(playlist['playlistid']), -4))
       show = show_xml_to_json(r.text)
       
-      # showtitle = "".join([c for c in   if c.isalpha() or c.isdigit() or c=="-" or c==' '])
       showtitle = re.sub('[^\w\s-]', '', item['showtitle'].strip())
       try:
-        os.makedirs("~/Music/vivia-scraper/" + show['showdj'].strip() + "/" + showtitle)
+        os.makedirs(root_path + show['showdj'].strip() + "/" + showtitle)
       except:
         pass
         
       path, ext = os.path.splitext(show['showphoto'])
       r = requests.get(show['showphoto'])
-      path = "~/Music/vivia-scraper/" + show['showdj'].strip() + "/" + showtitle + "/cover" + ext
+      path = root_path + show['showdj'].strip() + "/" + showtitle + "/cover" + ext
       with open(path, 'wb') as f:
         print show['showphoto'], "->", path #, f, r.raw
         f.write(r.raw.data)
@@ -124,7 +132,7 @@ if __name__ == '__main__':
         trackname = str(i) + " " + name
         trackname = re.sub('[^\w\s-]', '', trackname)
         
-        path = "~/Music/vivia-scraper/" + show['showdj'].strip() + "/" + showtitle + "/" + trackname + ext
+        path = root_path + show['showdj'].strip() + "/" + showtitle + "/" + trackname + ext
         r = requests.get(track['location'])
         with open(path, 'wb') as f:
           print track['location'], "->", path #, f, r.raw
