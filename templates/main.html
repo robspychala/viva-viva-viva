@@ -4,7 +4,7 @@
 <title>{% if data %}{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}{% else %}VIVA-VIVA-VIVA{%endif%}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/library/screen.css" media="screen" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 {% block head %}
 {% if data %}
 <meta playlistid="{{playlistid}}"/>
@@ -23,15 +23,15 @@
 <script>
 var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track.album %} - {{track.album}}{% endif %}",mp3:"{{track.location}}"},{% endfor %}];
 </script>
+<script type="text/javascript" src="/library/soundmanager2-jsmin.js"></script>
 <script>
+
 {% include "main.js" %}
 </script>
 {% endblock %}
-<script type="text/javascript" src="/library/jquery.jplayer.js"></script>
-</head>
 
+</head>
 <body>
-  
 {% if prod %}
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -64,10 +64,8 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 {% if data %}
 
 <div id="content">
-
 <div class="image pulse">
 <img border="0" src="{{data.showphoto}}" alt="{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}"></div>
-
 <div>
 <h2>{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}</h2>
 {%if data.showdesc_html %}<p>{{data.showdesc_html}}</p>{%endif%}
@@ -77,26 +75,13 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 <div id="player">
   
   <div class="jp-interface">
-  				<ul class="jp-controls">
-  					<li><a href="#" id="jplayer_play" class="jp-play" tabindex="1"><img src="/images/av_play.png" border="0" width="36" height="36"/></a></li>
-  					<li><a href="#" id="jplayer_pause" class="jp-pause" tabindex="1"><img src="/images/av_pause.png" border="0" width="36" height="36"/></a></li>
-            <!-- <li><a href="#" id="jplayer_stop" class="jp-stop" tabindex="1">stop</a></li> -->
-            <!-- <li><a href="#" id="jplayer_volume_min" class="jp-volume-min" tabindex="1">min volume</a></li>
-            <li><a href="#" id="jplayer_volume_max" class="jp-volume-max" tabindex="1">max volume</a></li> -->
-  					<li><a href="#" id="jplayer_previous" class="jp-previous" tabindex="1"><img src="/images/av_rewind.png" border="0" width="36" height="36"/></a></li>
-  					<li><a href="#" id="jplayer_next" class="jp-next" tabindex="1"><img src="/images/av_fast_forward.png" border="0" width="36" height="36"/></a></li>
-  				</ul>
-          <!-- <div class="jp-progress">
-            <div id="jplayer_load_bar" class="jp-load-bar">
-              <div id="jplayer_play_bar" class="jp-play-bar"></div>
-            </div>
-          </div> -->
-          <!-- <div id="jplayer_volume_bar" class="jp-volume-bar">
-            <div id="jplayer_volume_bar_value" class="jp-volume-bar-value"></div>
-          </div> -->
-          <!-- <div id="jplayer_play_time" class="jp-play-time"></div> -->
-          <!-- <div id="jplayer_total_time" class="jp-total-time"></div> -->
-  			</div>
+    <ul class="jp-controls">
+      <li><a href="#" id="player_play" class="jp-play" tabindex="1"><img src="/images/av_play.png" border="0" width="36" height="36"/></a></li>
+      <li><a href="#" id="player_pause" class="jp-pause" tabindex="1"><img src="/images/av_pause.png" border="0" width="36" height="36"/></a></li>
+      <li><a href="#" id="player_previous" class="jp-previous" tabindex="1"><img src="/images/av_rewind.png" border="0" width="36" height="36"/></a></li>
+      <li><a href="#" id="player_next" class="jp-next" tabindex="1"><img src="/images/av_fast_forward.png" border="0" width="36" height="36"/></a></li>
+    </ul>
+  </div>
 </div>
 
 </div>
@@ -113,9 +98,7 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 {% else %}
 
 <div id="content">
-  
 <p>pick a DJ and playlist from above to listen</p>
-
 <iframe src="http://www.facebook.com/plugins/activity.php?site=http%253A%252F%252Fviva-viva-viva.appspot.com%252F&amp;width=600&amp;height=300&amp;header=true&amp;colorscheme=light&amp;font&amp;border_color=%2523ccc" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px; height:300px;" allowTransparency="true"></iframe>
 </div>
 
@@ -127,7 +110,7 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 <div class="band2"></div>
 </div>
 
-<p>started at the 2010 Tech Crunch <a href="http://twitter.com/#search?q=%23hackdisrupt">#hackdisrupt</a> Hack-a-thon in NYC.</p>
+<p>Started at the 2010 Tech Crunch <a href="http://twitter.com/#search?q=%23hackdisrupt">#hackdisrupt</a> Hack-a-thon in NYC.</p>
 
 <p>follow me on twitter <a href="http://twitter.com/robspychala">@robspychala</a></p>
 
