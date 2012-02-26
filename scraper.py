@@ -121,9 +121,9 @@ if __name__ == '__main__':
       path, ext = os.path.splitext(show['showphoto'])
       r = requests.get(show['showphoto'])
       path = root_path + showdj + "/" + showtitle + "/cover" + ext
-      with open(path, 'wb') as f:
-        print show['showphoto'], "->", path #, f, r.raw
-        f.write(r.raw.data)
+      f = open(path, 'wb')
+      print show['showphoto'], "->", path #, f, r.raw
+      f.write(r.raw.data)
       
       i = 1
       for track in show['data']:
@@ -139,8 +139,8 @@ if __name__ == '__main__':
         
         path = root_path + showdj + "/" + showtitle + "/" + trackname + ext
         r = requests.get(track['location'])
-        with open(path, 'wb') as f:
-          print track['location'], "->", path #, f, r.raw
-          f.write(r.raw.data)
+        f = open(path, 'wb')
+        print track['location'], "->", path #, f, r.raw
+        f.write(r.raw.data)
           
         i = i + 1        

@@ -32,6 +32,11 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 
 </head>
 <body>
+  
+  {% if data %}
+  <div id="back" class="pulse"><img border="0" src="{{data.showphoto}}" alt="{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}"></div>
+  {% endif %}
+  
 {% if prod %}
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -64,16 +69,11 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
 {% if data %}
 
 <div id="content">
-<div class="image pulse">
-<img border="0" src="{{data.showphoto}}" alt="{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}"></div>
+<div class="image pulse"><img border="0" src="{{data.showphoto}}" alt="{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}"></div>
 <div>
 <h2>{% if data.showdj %}{{data.showdj}} - {%endif%}{{data.showtitle}}</h2>
 {%if data.showdesc_html %}<p>{{data.showdesc_html}}</p>{%endif%}
-
-<div id="jquery_jplayer"></div>
-
 <div id="player">
-  
   <div class="jp-interface">
     <ul class="jp-controls">
       <li><a href="#" id="player_play" class="jp-play" tabindex="1"><img src="/images/av_play.png" border="0" width="36" height="36"/></a></li>
@@ -83,7 +83,6 @@ var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track
     </ul>
   </div>
 </div>
-
 </div>
 
 <div id="tracks">

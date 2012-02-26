@@ -1,6 +1,8 @@
 body {
   font-family: Helvetica;
   font-size: 13px;
+/*  margin: 0;
+  padding: 0;*/
 }
 
 a {
@@ -77,6 +79,7 @@ a {
 #content {
   width: 600px;
   margin: 40px auto 20px auto;
+  text-shadow: 0 2px 1px #fff;
 }
 
 h1 a {
@@ -99,19 +102,12 @@ h1 sub {
 
 @-webkit-keyframes pulse {
   0% {
-    border-right: 4px solid pink;
     -webkit-transform: scale(1.0) rotate(0deg);
   }
-/*  33% {  
-    -webkit-transform: rotate(-.7deg);
-  }*/
   50% {
     -webkit-transform: scale(1.05);
   }
-/*  66% {
-    -webkit-transform: rotate(.7deg);
-  }
-*/  100% {
+  100% {
     -webkit-transform: rotate(0);
   }
 }
@@ -131,8 +127,14 @@ h1 sub {
   float: left;
   margin-right: 30px;
   margin-bottom: 30px;
-/*  padding-bottom: 20px;*/
-/*  padding-right: 10px;*/
-/*  border-right: 4px solid pink;*/
-/*  border-bottom: 4px solid pink;*/
+}
+
+#back {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .1;
 }

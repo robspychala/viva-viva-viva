@@ -90,6 +90,9 @@ $(document).ready(function(){
     return false;
   });
   
+  $("#back img").width($(window).width());
+  $("#back img").height($(window).height());
+  
   displayPlayList();
   play();
   
