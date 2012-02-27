@@ -21,7 +21,7 @@
 <meta property="fb:admins" content="robspychala"/>
 {% endif %}
 <script>
-var myPlayList = [{% for track in data.data %}{name:"{{track.artist}}{% if track.album %} - {{track.album}}{% endif %}",mp3:"{{track.location}}"},{% endfor %}];
+var myPlayList = {{playlist_json}};
 </script>
 <script type="text/javascript" src="/library/soundmanager2-jsmin.js"></script>
 <script>

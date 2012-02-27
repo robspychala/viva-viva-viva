@@ -47,18 +47,31 @@ class MainHandler(webapp.RequestHandler):
     aid = self.request.get("aid", None)
     playlistid = self.request.get("playlistid", None)
     
-    if aid and playlistid:    
+    if aid and playlistid:
       self.template_values = fetch_show(int(aid),
                                         int(playlistid),
                                         -4)
     else:
       self.template_values = {}
     
+    # logging.info(self.template_values['data']['data'])
+    # print "xxx", str(self.template_values)
+    
     self.template_values.update({
       'prod': site_util.is_production(),
       'aid': aid,
       'playlistid': playlistid
     })
+    
+    def format_name(track):
+      logging.info(track)
+      name = track['artist']
+      if track.has_key('album'):
+        name = name + " - " + track['album']
+      return name
+    
+    
+    self.template_values['playlist_json'] = json.dumps([{"name":format_name(track), "mp3":track['location']} for track in self.template_values['data']['data']])
     
     logging.info(self.template_values)
   
