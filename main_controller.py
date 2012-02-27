@@ -70,8 +70,8 @@ class MainHandler(webapp.RequestHandler):
         name = name + " - " + track['album']
       return name
     
-    
-    self.template_values['playlist_json'] = json.dumps([{"name":format_name(track), "mp3":track['location']} for track in self.template_values['data']['data']])
+    if self.template_values.has_key('data'):
+      self.template_values['playlist_json'] = json.dumps([{"name":format_name(track), "mp3":track['location']} for track in self.template_values['data']['data']])
     
     logging.info(self.template_values)
   
